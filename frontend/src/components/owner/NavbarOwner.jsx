@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { assets, dummyUserData } from '../../assets/assets'
 
 function NavbarOwner() {
@@ -10,7 +11,7 @@ function NavbarOwner() {
         <Link to='/'>
             <img src={assets.logo} alt='' className='h-7'/>
         </Link>
-        <p>Welcome, {user.namen || "Owner"}</p>
+        <p>Welcome, {user.name || "Owner"}</p>
     </div>
   )
 }

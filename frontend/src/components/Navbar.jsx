@@ -27,7 +27,7 @@ function Navbar({setShowLogin}) {
 
             <div className='flex max-sm:flex-col items-start sm:items-center gap-6'>
                 <button 
-                    onClick={()=> navigate('/qwnner')} 
+                    onClick={()=> navigate('/owner')} 
                     className='cursor-pointer'
                 >
                         Dashboard
