@@ -1,11 +1,11 @@
-import User from "../models/User"
+import User from "../models/User.js"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 //Generate JWT Token
 const generateToken = (userId) =>{
     const payload = userId;
-    return jwt.sign(playload, process.env.JWT_SECRET)
+    return jwt.sign(payload, process.env.JWT_SECRET)
 }
 
 // Register User
@@ -54,6 +54,17 @@ export const loginUser = async (req, res) => {
         res.json({success: true, token})
     } catch (error) {
         console.log(console.error.message)
+        res.json({success: false, message: error.message}) 
+    }
+}
+
+// Get User data using Token (JWT)
+export const getUserData = async (req, res) => {
+    try {
+        const {user} = req;
+        res.json({success: true, user});
+    } catch (error) {
+        console.log(error.message);
         res.json({success: false, message: error.message})
     }
 }
