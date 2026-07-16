@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { assets, dummyDashboardData } from '../../assets/assets'
+import { assets } from '../../assets/assets'
 import Title from '../../components/owner/Title'
+import { useAppContext } from '../../context/AppContext'
+import toast from 'react-hot-toast'
 
 function Dashboard() {
-  const currency = import.meta.env.VITE_CURRENCY
+
+  const {axios, isOwner, currency} = useAppContext()
 
   const [data,  setData] = useState({
     totalCars: 0,
@@ -21,9 +24,24 @@ function Dashboard() {
     {title: "Total Confirmed", value: data.completedBookings, icon: assets.listIconColored},
   ]
 
+  const fetchDashboardData = async () => {
+    try {
+      const { data } = await axios.get('/api/owner/dashboard')
+      if (data.success) {
+        setData(data.dashboardData)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
   useEffect(() => {
-    setData(dummyDashboardData)
-  },[])
+    if(isOwner){
+      fetchDashboardData()
+    }
+  },[isOwner])
 
   return (
     <div className='px-4 pt-10 md:px-10 flex-1'>
@@ -52,20 +70,20 @@ function Dashboard() {
           <h1 className='text-lg font-medium'>Recent Bookings</h1>
           <p className='text-gray-500'>Latest customer bookings</p>
           {
-            data.recentBookings.map((booking, index) => (
+            (data.recentBookings || []).map((booking, index) => (
               <div key={index} className='mt-4 flex items-center justify-between'>
                 <div className='flex items-center gap-2'>
                   <div className='hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary/10'>
                     <img src={assets.listIconColored} alt='' className='h-5 w-5'/>
                   </div>
                   <div>
-                    <p>{booking.car.brand} {booking.car.model}</p>
-                    <p className='text-sm text-gray-500'>{booking.createdAt.split('T')[0]}</p>
+                    <p>{booking?.car?.brand ?? 'Unknown'} {booking?.car?.model ?? ''}</p>
+                    <p className='text-sm text-gray-500'>{booking?.createdAt?.split('T')[0] ?? ''}</p>
                   </div>
                 </div>
                 <div className='flex items-center gap-2 font-medium'>
-                  <p className='text-sm text-gray-500'>{currency}{booking.price}</p>
-                  <p className='px-3 py-0.5 border border-borderColor rounded-full text-sm'>{booking.status}</p>
+                  <p className='text-sm text-gray-500'>{currency}{booking?.price ?? 0}</p>
+                  <p className='px-3 py-0.5 border border-borderColor rounded-full text-sm'>{booking?.status ?? 'N/A'}</p>
                 </div>
               </div>
             ))

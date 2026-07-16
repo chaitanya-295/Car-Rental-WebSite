@@ -78,7 +78,7 @@ export const toggleCarAvailability = async (req, res) => {
             return res.json({success: false, message: "Unauthorized"});
         }
 
-        car.isAvailable = !car.isAvailable;
+        car.isAvaliable = !car.isAvaliable;
         await car.save()
 
         res.json({success: true, message: "Availability Toggled"})
@@ -131,10 +131,10 @@ export const getDashboardData = async (req, res) => {
 
         const dashboardData = {
             totalCars: cars.length,
-            totalBookings: bookings.length,
+            totalBookings: booking.length,
             pendingBookings: pendingBookings.length,
             completedBookings: completedBookings.length,
-            recentBookings: bookings.slice(0, 3),
+            recentBookings: booking.slice(0, 3),
             monthlyRevenue
         }
 
@@ -154,7 +154,7 @@ export const updateUserImage = async (req, res) => {
         const imageFile = req.file;
 
         //upload image to Imagekit
-        const fileBuffer = fs.readFileSynce(imageFile.path)
+        const fileBuffer = fs.readFileSync(imageFile.path)
         const response = await imagekit.upload({
             file: fileBuffer,
             fileName: imageFile.originalname,

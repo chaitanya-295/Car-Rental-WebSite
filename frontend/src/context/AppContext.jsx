@@ -22,7 +22,7 @@ export const AppProvider = ({ children }) => {
     const [pickupDate, setPickupDate] = useState('')
     const [returnDate, setReturnDate] =useState('')
 
-    const [cars, setCars] = useState('')
+    const [cars, setCars] = useState([])
 
     // Function to check if user is logged in
     const fetchUser = async () => {
