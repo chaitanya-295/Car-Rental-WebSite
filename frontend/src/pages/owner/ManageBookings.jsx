@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Title from '../../components/owner/Title'
 import { useAppContext } from '../../context/AppContext'
+import toast from 'react-hot-toast'
 
 function ManageBookings() {
 
@@ -19,9 +20,9 @@ function ManageBookings() {
 
   const changeBookingStatus = async (bookingId, status) => {
      try {
-      const { data } = await axios.post('/api/bookings/change-status', {bookingId, status})
+      const { data } = await axios.put('/api/bookings/change-status', {bookingId, status})
       if(data.success){
-        toast.success(data.meessage)
+        toast.success(data.message)
         fetchOwnerBookings()
       } else {
         toast.error(data.message)

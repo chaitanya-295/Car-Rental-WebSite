@@ -40,7 +40,7 @@ export const checkAvailabilityofCar = async (req, res) => {
 // API to Create Booking
 export const createBooking = async (req, res) => {
     try {
-        const {_id} = req.body;
+        const {_id} = req.user;
         const {car, pickupDate, returnDate} = req.body;
 
         const isAvailable = await checkCarAvailability(car, pickupDate, returnDate)
