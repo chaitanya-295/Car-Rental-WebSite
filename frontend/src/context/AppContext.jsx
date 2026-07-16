@@ -4,7 +4,6 @@ import { toast } from 'react-hot-toast'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import Cars from "../pages/Cars";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
 

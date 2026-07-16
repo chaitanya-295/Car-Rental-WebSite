@@ -1,4 +1,5 @@
 import Booking from "../models/Booking.js";
+import Car from "../models/Car.js";
 
 
 // Function to Check Availability of Car for a given Date
@@ -6,7 +7,7 @@ const checkCarAvailability = async (car, pickupDate, returnDate) => {
     const bookings = await Booking.find({
         car,
         pickupDate: { $lte: returnDate},
-        returnDate: { $gtte: pickupDate},
+        returnDate: { $gte: pickupDate},
     })
     return bookings.length === 0;
 }
@@ -20,8 +21,8 @@ export const checkAvailabilityofCar = async (req, res) => {
         const cars = await Car.find({location, isAvaliable: true})
 
         // check car availability for the give date range using promise
-        const availableCarsPromises = car.map(async (car) => {
-            const isAvailable = await checkAvailability(car._id, pickupDate, returnDate)
+        const availableCarsPromises = cars.map(async (car) => {
+            const isAvailable = await checkCarAvailability(car._id, pickupDate, returnDate)
             return {...car._doc, isAvailable: isAvailable}
         })
 
@@ -42,7 +43,7 @@ export const createBooking = async (req, res) => {
         const {_id} = req.body;
         const {car, pickupDate, returnDate} = req.body;
 
-        const isAvailable = await checkAvailability(car, pickupDate, returnDate)
+        const isAvailable = await checkCarAvailability(car, pickupDate, returnDate)
         if (!isAvailable){
             return res.json({success: false, message: "Car is not available"})
         }
