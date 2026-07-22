@@ -10,7 +10,15 @@ function Navbar() {
   const {setShowLogin, user, logout, isOwner, axios, setIsOwner} = useAppContext()
   const location = useLocation()
   const [open, setOpen] = useState(false)
+  const [searchInput, setSearchInput] = useState('')
   const navigate = useNavigate()
+
+  const onSearchSubmit = (e) => {
+    if (e.key === 'Enter' && searchInput.trim()) {
+      navigate(`/cars?q=${encodeURIComponent(searchInput.trim())}`)
+      setSearchInput('')
+    }
+  }
 
   const changeRole = async () => {
     try {
@@ -47,9 +55,26 @@ function Navbar() {
                 </Link>
             ))}
 
-            <div className='hidden lg:flex items-center text-sm gap-2 border border-borderColor px-3 rounded-full max-w-56'>
-                <input type='text' className='py-1.5 w-full bg-transparent outline-none placeholder-gray-500' placeholder='Search products'/>
-                <img src={assets.search_icon} alt='search'/>
+            <div className='hidden lg:flex items-center text-sm gap-2 border border-borderColor px-3 rounded-full max-w-56 focus-within:ring-2 focus-within:ring-primary/50 transition-all'>
+                <input 
+                    type='text' 
+                    className='py-1.5 w-full bg-transparent outline-none placeholder-gray-500' 
+                    placeholder='Search cars...'
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    onKeyDown={onSearchSubmit}
+                />
+                <img 
+                    src={assets.search_icon} 
+                    alt='search' 
+                    className='cursor-pointer opacity-70 hover:opacity-100 transition-opacity' 
+                    onClick={() => {
+                        if (searchInput.trim()) {
+                            navigate(`/cars?q=${encodeURIComponent(searchInput.trim())}`)
+                            setSearchInput('')
+                        }
+                    }}
+                />
             </div>
 
             <div className='flex max-sm:flex-col items-start sm:items-center gap-6'>
