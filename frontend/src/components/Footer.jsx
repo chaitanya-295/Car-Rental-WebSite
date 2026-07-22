@@ -8,7 +8,7 @@ function Footer() {
         initial={{y: 30 , opacity:0 }}
         whileInView={{y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className='px-6 md:px-16 lg:px-24 xl:px-32 mt-60 text-sm text-gray-500'
+        className='px-6 md:px-16 lg:px-24 xl:px-32 mt-40 text-sm text-gray-600 bg-light/50 border-t border-borderColor pt-16'
      >
         <motion.div
             initial={{y: 20 , opacity:0 }}
@@ -37,12 +37,12 @@ function Footer() {
                     initial={{ opacity:0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.5 }} 
-                    className='flex items-center gap-3 mt-6'
+                    className='flex items-center gap-4 mt-6'
                 >
-                    <a href='#'><img src={assets.facebook_logo} className='w-5 h-5' alt=''/></a>
-                    <a href='#'><img src={assets.instagram_logo} className='w-5 h-5' alt=''/></a>
-                    <a href='#'><img src={assets.twitter_logo} className='w-5 h-5' alt=''/></a>
-                    <a href='#'><img src={assets.gmail_logo} className='w-5 h-5' alt=''/></a>
+                    <a href='#' className='hover:opacity-75 transition-opacity'><img src={assets.facebook_logo} className='w-5 h-5' alt=''/></a>
+                    <a href='#' className='hover:opacity-75 transition-opacity'><img src={assets.instagram_logo} className='w-5 h-5' alt=''/></a>
+                    <a href='#' className='hover:opacity-75 transition-opacity'><img src={assets.twitter_logo} className='w-5 h-5' alt=''/></a>
+                    <a href='#' className='hover:opacity-75 transition-opacity'><img src={assets.gmail_logo} className='w-5 h-5' alt=''/></a>
                 </motion.div>
             </div>
 
@@ -50,7 +50,7 @@ function Footer() {
                 initial={{ opacity:0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }} 
-                className='flex felx-wrap justify-between w-1/2 gap-8'
+                className='flex flex-wrap justify-between w-1/2 gap-8'
             >
                 <div>
                     <h2 className='text-base font-medium text-gray-800 uppercase'>Quick Links</h2>
@@ -87,7 +87,7 @@ function Footer() {
             initial={{ opacity:0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}  
-            className='flex flex-col md:flex-row gap-2 items-center justify-between py-5'
+            className='flex flex-col md:flex-row gap-2 items-center justify-between py-8 text-gray-500'
         >
             <p>@ {new Date().getFullYear()} Brand. All rights reserved.</p>
             <ul className='flex items-center gap-4'>

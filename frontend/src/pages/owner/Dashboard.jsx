@@ -52,12 +52,12 @@ function Dashboard() {
       <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-8 max-w-3xl'>
         {
           dashboardCards.map((card, index) => (
-            <div key={index} className='flex gap-2 items-center justify-between p-5 rounded-md border border-borderColor'>
+            <div key={index} className='flex gap-2 items-center justify-between p-6 rounded-xl border border-borderColor bg-white shadow-sm hover:shadow-lg transition-all duration-300'>
               <div>
                 <h1 className='text-xs text-gray-500'>{card.title}</h1>
                 <p className='text-lg font-semibold'>{card.value}</p>
               </div>
-              <div className='flex items-center justify-center w-10 h-10 rounded-full bg-primary/10'>
+              <div className='flex items-center justify-center w-12 h-12 rounded-full bg-primary/10'>
                 <img src={card.icon} alt='' className='h-4 w-4'/>
               </div>
             </div>
@@ -66,7 +66,7 @@ function Dashboard() {
       </div>
       <div className='flex flex-wrap items-start gap-6 mb-8 w-full'>
         {/* Recent Bookking */}
-        <div className='p-4 md:p-6 border border-borderColor  rounded-md max-w-lg w-full'>
+        <div className='p-5 md:p-8 border border-borderColor rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 max-w-lg w-full'>
           <h1 className='text-lg font-medium'>Recent Bookings</h1>
           <p className='text-gray-500'>Latest customer bookings</p>
           {
@@ -91,8 +91,8 @@ function Dashboard() {
         </div>
 
         {/* Monthly Revenue */}
-        <div className='p-4 md:p-6 mb-6 border border-borderColor rounded-md w-full md:max-w-xs'>
-          <h1 className='text-lg font-medium'>Monhtly Revenue</h1>
+        <div className='p-5 md:p-8 mb-6 border border-borderColor rounded-xl bg-white shadow-sm hover:shadow-md transition-all duration-300 w-full md:max-w-xs'>
+          <h1 className='text-lg font-medium'>Monthly Revenue</h1>
           <p className='text-gray-500'>Revenue for current month</p>
           <p className='text-3xl mt-6 font-semibold text-primary'>{currency}{data.monthlyRevenue}</p>
         </div>

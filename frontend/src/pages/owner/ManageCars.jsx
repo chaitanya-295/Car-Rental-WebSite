@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { assets } from '../../assets/assets'
 import Title from '../../components/owner/Title'
 import { useAppContext } from '../../context/AppContext'
@@ -9,6 +9,17 @@ function ManageCars() {
   const {isOwner, axios, currency} = useAppContext()
 
   const [cars, setCars] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
+  const [filterStatus, setFilterStatus] = useState('All')
+
+  const filteredCars = useMemo(() => {
+    return cars.filter(car => {
+      const searchLower = searchQuery.toLowerCase()
+      const matchesSearch = car.brand.toLowerCase().includes(searchLower) || car.model.toLowerCase().includes(searchLower)
+      const matchesStatus = filterStatus === 'All' ? true : (filterStatus === 'Available' ? car.isAvaliable : !car.isAvaliable)
+      return matchesSearch && matchesStatus
+    })
+  }, [cars, searchQuery, filterStatus])
 
   const fetchOwnerCars = async () => {
     try {
@@ -66,7 +77,29 @@ function ManageCars() {
         subTitle='View all listed cars, update their details, or remove them from the booking platform.'
       />
 
-      <div className='max-w-3xl w-full rounded-md overflow-hidden border border-borderColor mt-6'>
+      <div className='flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 max-w-3xl'>
+        <div className='flex items-center bg-white border border-borderColor rounded-full px-4 py-2 w-full sm:max-w-xs shadow-sm focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary transition-all'>
+          <img src={assets.search_icon} alt='' className='w-4 h-4 opacity-50 mr-2'/>
+          <input 
+            type='text' 
+            placeholder='Search cars...' 
+            className='outline-none text-sm w-full bg-transparent'
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+          />
+        </div>
+        <select 
+          className='bg-white border border-borderColor rounded-full px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm w-full sm:w-auto text-gray-600 cursor-pointer'
+          value={filterStatus}
+          onChange={e => setFilterStatus(e.target.value)}
+        >
+          <option value='All'>All Statuses</option>
+          <option value='Available'>Available</option>
+          <option value='Unavailable'>Unavailable</option>
+        </select>
+      </div>
+
+      <div className='max-w-3xl w-full rounded-xl overflow-hidden border border-borderColor mt-6 bg-white shadow-sm hover:shadow-md transition-shadow'>
         <table className='w-full border-collapse text-left text-sm text-gray-600'>
           <thead className='text-gray-500'>
             <tr>
@@ -79,8 +112,8 @@ function ManageCars() {
           </thead>
           <tbody>
             {
-              cars.map((car, index)=> (
-                <tr key={index} className='border border-borderColor'>
+              filteredCars.length > 0 ? filteredCars.map((car, index)=> (
+                <tr key={index} className='border-t border-borderColor hover:bg-gray-50 transition-colors'>
                   <td className='p-3 flex items-center gap-3'>
                     <img src={car.image} alt='' className='h-12 w-12 aspect-square rounded-md object-cover'/>
                     <div className='max-md:hidden'>
@@ -110,7 +143,13 @@ function ManageCars() {
                     />
                   </td>
                 </tr>
-              ))
+              )) : (
+                <tr>
+                  <td colSpan="5" className="p-8 text-center text-gray-500">
+                    No cars found matching your search or filter.
+                  </td>
+                </tr>
+              )
             }
           </tbody>
         </table>

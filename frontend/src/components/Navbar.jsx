@@ -32,7 +32,7 @@ function Navbar() {
         initial={{y: -20, opacity: 0}}
         animate={{y: 0, opacity: 1}}
         transition={{duration: 0.2}} 
-        className={`flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 text-gray-600 border-b border-borderColor relative transition-all ${location.pathname === "/" && "bg-light"}`}>
+        className={`flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 text-gray-600 border-b border-borderColor sticky top-0 z-50 transition-all ${location.pathname === "/" ? "bg-light/80 backdrop-blur-md" : "bg-white/80 backdrop-blur-md"}`}>
         <Link to='/'>
             <motion.img
                 whileHover={{scale: 1.05}} 
@@ -61,7 +61,7 @@ function Navbar() {
                 </button>
                 <button 
                     onClick={()=> {user ? logout() : setShowLogin(true)}} 
-                    className='cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition-all text-white rounded-lg'
+                    className='cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition-all duration-300 text-white rounded-full shadow-md hover:shadow-lg'
                 >
                         {user ? 'Logout' : 'Login'}
                 </button>

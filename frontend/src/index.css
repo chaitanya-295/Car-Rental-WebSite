@@ -7,8 +7,14 @@
 }
 
 @theme {
-  --color-primary: #2563EB;
-  --color-primary-dull: #1F58D8;
-  --color-light: #F1F5F9;
-  --color-borderColor: #c4c7d2;
+  --color-primary: #4F46E5;
+  --color-primary-dull: #4338CA;
+  --color-light: #F8FAFC;
+  --color-borderColor: #E2E8F0;
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)];
+  }
 }

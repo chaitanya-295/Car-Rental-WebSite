@@ -75,7 +75,7 @@ function CarDetails() {
                 {car.category} . {car.year}
               </p>
             </div>
-            <hr className='border-borderrColor my-6'/>
+            <hr className='border-borderColor my-6'/>
 
             <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
               {[
@@ -126,7 +126,7 @@ function CarDetails() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }} 
           onSubmit={handleSubmit} 
-          className='shadow-lg h-max sticky top-18 rounded-xl p-6 space-y-6 text-gray-500'
+          className='shadow-[0_8px_30px_rgb(0,0,0,0.12)] glass h-max sticky top-24 rounded-2xl p-6 space-y-6 text-gray-700'
         >
           <p 
             className='flex items-center justify-between text-2xl text-gray-800 font-semibold'
@@ -162,7 +162,7 @@ function CarDetails() {
             />
           </div>
 
-          <button className='w-full bg-primary hover:bg-primary-dull transition-all py-3 font-medium text-white rounded-xl cursor-pointer'>Book Noow</button>
+          <button className='w-full bg-primary hover:bg-primary-dull transition-all duration-300 py-3 font-medium shadow-md text-white rounded-full cursor-pointer'>Book Now</button>
           <p className='text-center text-sm'>No credit card required to reserve</p>
         </motion.form>
       </div>

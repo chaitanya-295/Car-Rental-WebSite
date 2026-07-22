@@ -23,15 +23,15 @@ function FeaturedSection() {
             transition={{ duration: 1, delay: 0.5 }}
         >
             <Title 
-                title='Featuured Vehicles'
-                subTitle='Explore our selectionn of premium vehicles available for your next adventuure.' 
+                title='Featured Vehicles'
+                subTitle='Explore our selection of premium vehicles available for your next adventure.' 
             />
         </motion.div>
         <motion.div
             initial={{y: 100 , opacity:0}}
             whileInView={{y: 0, opacity: 1}}
             transition={{ duration: 1, delay: 0.5 }} 
-            className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-18'
+            className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mt-18'
         >
             {
                 cars.slice(0,3).map((car) => (
@@ -53,7 +53,7 @@ function FeaturedSection() {
             onClick={() => {
                 navigate('/cars'); scrollTo(0,0)
             }}
-            className='flex items-center justify-center gap-2 px-6 py-2 border border-borderColor hover:bg-gray-50 rounded-md mt-18 cursor-pointer'
+            className='flex items-center justify-center gap-2 px-8 py-3 border border-borderColor hover:bg-gray-50 rounded-full mt-18 cursor-pointer shadow-sm hover:shadow-md transition-all duration-300'
         >
             Explore all cars
             <img src={assets.arrow_icon} alt='arrow'/>

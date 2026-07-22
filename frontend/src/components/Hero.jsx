@@ -24,7 +24,7 @@ function Hero() {
             initial={{y: 50 , opacity:0}}
             animate={{y: 0, opacity: 1}}
             transition={{duration: 0.8, delay: 0.2}}
-            className='text-4xl md:text-5xl font-semibold'>Luxury carson Rent
+            className='text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-500'>Luxury Cars on Rent
         </motion.h1>
 
         <motion.form
@@ -32,7 +32,7 @@ function Hero() {
             animate={{ scale: 1, y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }} 
             onSubmit={handleSearch} 
-            className='flex flex-col md:flex-row items-start md:items-center justify-between p-6 rounded-lg md:rounded-full w-full max-w-80 md:max-w-200 bg:white shadow-[0px_8px_20px_rgba(0,0,0,0.1)]'
+            className='flex flex-col md:flex-row items-start md:items-center justify-between p-6 rounded-2xl md:rounded-full w-full max-w-80 md:max-w-200 glass transition-all duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.15)]'
         >
             <div className='flex flex-col md:flex-row items-start md:items-center gap-10 min-md:ml-8'>
                 <div className='flex flex-col items-start gap-2'>
@@ -43,7 +43,7 @@ function Hero() {
                         <option value=''>Pickup Location</option>
                         {cityList.map((city) => <option key={city} value={city}>{city}</option>)}
                     </select>
-                    <p className='px-1 text-sm text-gray-500'>{pickupLocation ? pickupLocation : 'Plese select location'}</p>
+                    <p className='px-1 text-sm text-gray-500'>{pickupLocation ? pickupLocation : 'Please select location'}</p>
                 </div>
                 <div className='flex flex-col items-start gap-2'>
                     <label htmlFor='pickup-date'>Pick-up Date</label>
@@ -69,8 +69,8 @@ function Hero() {
             </div>
             <motion.button
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ sccale: 0.95 }} 
-                className='flex items-center justify-center gap-1 px-9 py-3 max-sm:mt-4 bg-primary hover:bg-primary-dull text-white rounded-full cursor-pointer'
+                whileTap={{ scale: 0.95 }} 
+                className='flex items-center justify-center gap-2 px-9 py-3 max-sm:mt-4 bg-primary hover:bg-primary-dull text-white rounded-full cursor-pointer shadow-lg shadow-primary/30 transition-all'
             >
                 <img 
                     src={assets.search_icon} 
